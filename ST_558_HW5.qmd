@@ -179,7 +179,6 @@ ggplot(student_combined, aes(x = school, fill = sex)) +
 
 ```{r}
 summary_stats <- student_combined |>
-  filter(internet == "yes") |>
   summarize(
     mean_age = mean(age, na.rm = TRUE),
     sd_age = sd(age, na.rm = TRUE),
@@ -226,7 +225,7 @@ print(summary_stats)
 
 ***As from above values we can see that mean and SD value for absense where Internet variable had "Yes" value is more than the other one.***
 
-#### Calculating Measures of centre (mean) and spread (SD) for age, G3 from the Portuguese dataset, and absences after subsetting on Filter variable across Sex
+#### Calculating Measures of centre (mean) and spread (SD) for age, G3 from the Portuguese dataset, and absences variables across Sex
 
 ```{r}
 summary_stats <- student_combined |>
@@ -245,7 +244,7 @@ print(summary_stats)
 
 ***We can see that mean age for both Male and female are same but Females have more average score in grade. This could suggest female students performs better or more consistent than Male as Male students have more SD.***
 
-#### Calculating Measures of centre (mean) and spread (SD) for age, G3 from the Portuguese dataset, and absences after subsetting on Filter variable across Sex and School
+#### Calculating Measures of centre (mean) and spread (SD) for age, G3 from the Portuguese dataset, and absences variables across Sex and School
 
 ```{r}
 summary_stats <- student_combined |>
@@ -286,6 +285,30 @@ ggplot(student_combined, aes(x = age, color = school)) +
 ```
 
 ***Histogram shows us that there are older students in MS school and significant different in student population between GP and MS. Density plot shows sharp peak at 18 for MS might indicate that this school is mostly for students with 18 years. And GP school have variable age spread which would consist of students with varied age.***
+
+#### Histogram and density plot for absences by school
+
+```{r}
+ggplot(student_combined, aes(x = absences.x, fill = school)) +
+  geom_histogram(alpha = 0.6, position = "identity", binwidth = 1) +
+  labs(x = "Absences", title = "Histogram of Absences by School")
+
+ggplot(student_combined, aes(x = absences.x, color = school)) +
+  geom_density() +
+  labs(x = "Absences", title = "Density Plot of Absences by School")
+```
+
+***Histogram shows us that there are taller bars near zero which shows absences near zero. Also we can see outlier of students which higher absences in GP. Density plot shows similar picture, so regular attendance in both school is observed.***
+
+#### Boxplot for age by sex
+
+```{r}
+ggplot(student_combined, aes(x = sex, y = age, fill = sex)) +
+  geom_boxplot() +
+  labs(x = "Sex", y = "Age", title = "Boxplot of Age by Sex")
+```
+
+***Median Age of Male students is higher than Female. Also spread of age in Male students is more, which results in more variable age. Also Male students has older age students are outliers.***
 
 #### Boxplot for absences by sex
 

@@ -508,22 +508,21 @@ school   F   M
 <h4 class="anchored" data-anchor-id="calculating-measures-of-centre-mean-and-spread-sd-for-age-g3-from-the-portuguese-dataset-and-absences">Calculating Measures of centre (mean) and spread (SD) for age, G3 from the Portuguese dataset, and absences</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>summary_stats <span class="ot">&lt;-</span> student_combined <span class="sc">|&gt;</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(internet <span class="sc">==</span> <span class="st">"yes"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_age =</span> <span class="fu">mean</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_age =</span> <span class="fu">sd</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_G3_por =</span> <span class="fu">mean</span>(G3.y, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_G3_por =</span> <span class="fu">sd</span>(G3.y, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_absences =</span> <span class="fu">mean</span>(absences.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_absences =</span> <span class="fu">sd</span>(absences.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(summary_stats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_age =</span> <span class="fu">mean</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_age =</span> <span class="fu">sd</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_G3_por =</span> <span class="fu">mean</span>(G3.y, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_G3_por =</span> <span class="fu">sd</span>(G3.y, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_absences =</span> <span class="fu">mean</span>(absences.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_absences =</span> <span class="fu">sd</span>(absences.x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(summary_stats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 6
   mean_age sd_age mean_G3_por sd_G3_por mean_absences sd_absences
      &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;
-1     16.5   1.17        12.6      2.84          5.63        8.08</code></pre>
+1     16.6   1.17        12.5      2.95          5.32        7.63</code></pre>
 </div>
 </div>
 <p><strong><em>Low SD of age shows that Students are mostly around mean age i.e., 16.5. But in case of absenses we can see high number of variability.</em></strong></p>
@@ -570,8 +569,8 @@ school   F   M
 </div>
 <p><strong><em>As from above values we can see that mean and SD value for absense where Internet variable had “Yes” value is more than the other one.</em></strong></p>
 </section>
-<section id="calculating-measures-of-centre-mean-and-spread-sd-for-age-g3-from-the-portuguese-dataset-and-absences-after-subsetting-on-filter-variable-across-sex" class="level4">
-<h4 class="anchored" data-anchor-id="calculating-measures-of-centre-mean-and-spread-sd-for-age-g3-from-the-portuguese-dataset-and-absences-after-subsetting-on-filter-variable-across-sex">Calculating Measures of centre (mean) and spread (SD) for age, G3 from the Portuguese dataset, and absences after subsetting on Filter variable across Sex</h4>
+<section id="calculating-measures-of-centre-mean-and-spread-sd-for-age-g3-from-the-portuguese-dataset-and-absences-variables-across-sex" class="level4">
+<h4 class="anchored" data-anchor-id="calculating-measures-of-centre-mean-and-spread-sd-for-age-g3-from-the-portuguese-dataset-and-absences-variables-across-sex">Calculating Measures of centre (mean) and spread (SD) for age, G3 from the Portuguese dataset, and absences variables across Sex</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>summary_stats <span class="ot">&lt;-</span> student_combined <span class="sc">|&gt;</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sex) <span class="sc">|&gt;</span></span>
@@ -595,8 +594,8 @@ school   F   M
 </div>
 <p><strong><em>We can see that mean age for both Male and female are same but Females have more average score in grade. This could suggest female students performs better or more consistent than Male as Male students have more SD.</em></strong></p>
 </section>
-<section id="calculating-measures-of-centre-mean-and-spread-sd-for-age-g3-from-the-portuguese-dataset-and-absences-after-subsetting-on-filter-variable-across-sex-and-school" class="level4">
-<h4 class="anchored" data-anchor-id="calculating-measures-of-centre-mean-and-spread-sd-for-age-g3-from-the-portuguese-dataset-and-absences-after-subsetting-on-filter-variable-across-sex-and-school">Calculating Measures of centre (mean) and spread (SD) for age, G3 from the Portuguese dataset, and absences after subsetting on Filter variable across Sex and School</h4>
+<section id="calculating-measures-of-centre-mean-and-spread-sd-for-age-g3-from-the-portuguese-dataset-and-absences-variables-across-sex-and-school" class="level4">
+<h4 class="anchored" data-anchor-id="calculating-measures-of-centre-mean-and-spread-sd-for-age-g3-from-the-portuguese-dataset-and-absences-variables-across-sex-and-school">Calculating Measures of centre (mean) and spread (SD) for age, G3 from the Portuguese dataset, and absences variables across Sex and School</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>summary_stats <span class="ot">&lt;-</span> student_combined <span class="sc">|&gt;</span></span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(school, sex) <span class="sc">|&gt;</span></span>
@@ -682,16 +681,58 @@ G3.y        0.48034936  0.81904820  0.89244365  1.00000000</code></pre>
 </div>
 <p><strong><em>Histogram shows us that there are older students in MS school and significant different in student population between GP and MS. Density plot shows sharp peak at 18 for MS might indicate that this school is mostly for students with 18 years. And GP school have variable age spread which would consist of students with varied age.</em></strong></p>
 </section>
-<section id="boxplot-for-absences-by-sex" class="level4">
-<h4 class="anchored" data-anchor-id="boxplot-for-absences-by-sex">Boxplot for absences by sex</h4>
+<section id="histogram-and-density-plot-for-absences-by-school" class="level4">
+<h4 class="anchored" data-anchor-id="histogram-and-density-plot-for-absences-by-school">Histogram and density plot for absences by school</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_combined, <span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> absences.x, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Sex"</span>, <span class="at">y =</span> <span class="st">"Absences"</span>, <span class="at">title =</span> <span class="st">"Boxplot of Absences by Sex"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_combined, <span class="fu">aes</span>(<span class="at">x =</span> absences.x, <span class="at">fill =</span> school)) <span class="sc">+</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">position =</span> <span class="st">"identity"</span>, <span class="at">binwidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Absences"</span>, <span class="at">title =</span> <span class="st">"Histogram of Absences by School"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
 <p><img src="ST_558_HW5_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_combined, <span class="fu">aes</span>(<span class="at">x =</span> absences.x, <span class="at">color =</span> school)) <span class="sc">+</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Absences"</span>, <span class="at">title =</span> <span class="st">"Density Plot of Absences by School"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ST_558_HW5_files/figure-html/unnamed-chunk-20-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong><em>Histogram shows us that there are taller bars near zero which shows absences near zero. Also we can see outlier of students which higher absences in GP. Density plot shows similar picture, so regular attendance in both school is observed.</em></strong></p>
+</section>
+<section id="boxplot-for-age-by-sex" class="level4">
+<h4 class="anchored" data-anchor-id="boxplot-for-age-by-sex">Boxplot for age by sex</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_combined, <span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> age, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Sex"</span>, <span class="at">y =</span> <span class="st">"Age"</span>, <span class="at">title =</span> <span class="st">"Boxplot of Age by Sex"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ST_558_HW5_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong><em>Median Age of Male students is higher than Female. Also spread of age in Male students is more, which results in more variable age. Also Male students has older age students are outliers.</em></strong></p>
+</section>
+<section id="boxplot-for-absences-by-sex" class="level4">
+<h4 class="anchored" data-anchor-id="boxplot-for-absences-by-sex">Boxplot for absences by sex</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_combined, <span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">y =</span> absences.x, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Sex"</span>, <span class="at">y =</span> <span class="st">"Absences"</span>, <span class="at">title =</span> <span class="st">"Boxplot of Absences by Sex"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ST_558_HW5_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -701,13 +742,13 @@ G3.y        0.48034936  0.81904820  0.89244365  1.00000000</code></pre>
 <section id="scatterplot-with-jitter-for-g3-vs-g1-colored-by-school" class="level4">
 <h4 class="anchored" data-anchor-id="scatterplot-with-jitter-for-g3-vs-g1-colored-by-school">Scatterplot with jitter for G3 vs G1, colored by school</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_combined, <span class="fu">aes</span>(<span class="at">x =</span> G1.x, <span class="at">y =</span> G3.x, <span class="at">color =</span> school)) <span class="sc">+</span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">height =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"G1"</span>, <span class="at">y =</span> <span class="st">"G3"</span>, <span class="at">color =</span> <span class="st">"School"</span>, <span class="at">title =</span> <span class="st">"Scatterplot of G3 vs G1 Colored by School"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_combined, <span class="fu">aes</span>(<span class="at">x =</span> G1.x, <span class="at">y =</span> G3.x, <span class="at">color =</span> school)) <span class="sc">+</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">height =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"G1"</span>, <span class="at">y =</span> <span class="st">"G3"</span>, <span class="at">color =</span> <span class="st">"School"</span>, <span class="at">title =</span> <span class="st">"Scatterplot of G3 vs G1 Colored by School"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ST_558_HW5_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ST_558_HW5_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -716,13 +757,13 @@ G3.y        0.48034936  0.81904820  0.89244365  1.00000000</code></pre>
 <section id="scatterplot-with-jitter-for-g3-vs-g2-colored-by-school" class="level4">
 <h4 class="anchored" data-anchor-id="scatterplot-with-jitter-for-g3-vs-g2-colored-by-school">Scatterplot with jitter for G3 vs G2, colored by school</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_combined, <span class="fu">aes</span>(<span class="at">x =</span> G2.x, <span class="at">y =</span> G3.x, <span class="at">color =</span> school)) <span class="sc">+</span></span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">height =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"G2"</span>, <span class="at">y =</span> <span class="st">"G3"</span>, <span class="at">color =</span> <span class="st">"School"</span>, <span class="at">title =</span> <span class="st">"Scatterplot of G3 vs G2 Colored by School"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_combined, <span class="fu">aes</span>(<span class="at">x =</span> G2.x, <span class="at">y =</span> G3.x, <span class="at">color =</span> school)) <span class="sc">+</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">height =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"G2"</span>, <span class="at">y =</span> <span class="st">"G3"</span>, <span class="at">color =</span> <span class="st">"School"</span>, <span class="at">title =</span> <span class="st">"Scatterplot of G3 vs G2 Colored by School"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ST_558_HW5_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ST_558_HW5_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -732,14 +773,14 @@ G3.y        0.48034936  0.81904820  0.89244365  1.00000000</code></pre>
 <section id="faceted-scatterplot-of-g3-vs-g1-by-address" class="level4">
 <h4 class="anchored" data-anchor-id="faceted-scatterplot-of-g3-vs-g1-by-address">Faceted Scatterplot of G3 vs G1 by Address</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_combined, <span class="fu">aes</span>(<span class="at">x =</span> G1.x, <span class="at">y =</span> G3.x)) <span class="sc">+</span></span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> school)) <span class="sc">+</span></span>
-<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>address) <span class="sc">+</span></span>
-<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"G1"</span>, <span class="at">y =</span> <span class="st">"G3"</span>, <span class="at">title =</span> <span class="st">"Faceted Scatterplot of G3 vs G1 by Address"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_combined, <span class="fu">aes</span>(<span class="at">x =</span> G1.x, <span class="at">y =</span> G3.x)) <span class="sc">+</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> school)) <span class="sc">+</span></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>address) <span class="sc">+</span></span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"G1"</span>, <span class="at">y =</span> <span class="st">"G3"</span>, <span class="at">title =</span> <span class="st">"Faceted Scatterplot of G3 vs G1 by Address"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ST_558_HW5_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ST_558_HW5_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -749,18 +790,18 @@ G3.y        0.48034936  0.81904820  0.89244365  1.00000000</code></pre>
 <section id="scatterplot-with-faceting-by-two-categorical-variables-school-and-sex" class="level4">
 <h4 class="anchored" data-anchor-id="scatterplot-with-faceting-by-two-categorical-variables-school-and-sex">Scatterplot with faceting by two categorical variables (school and sex)</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_combined, <span class="fu">aes</span>(<span class="at">x =</span> G1.x, <span class="at">y =</span> G3.x, <span class="at">color =</span> school)) <span class="sc">+</span></span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">height =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(school <span class="sc">~</span> sex) <span class="sc">+</span>  <span class="co"># Facet by school and sex</span></span>
-<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"G1 (Math First Period Grade)"</span>, </span>
-<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"G3 (Math Final Grade)"</span>, </span>
-<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Scatterplot of G3 vs G1 Faceted by School and Sex"</span>, </span>
-<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"School"</span>) <span class="sc">+</span></span>
-<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(student_combined, <span class="fu">aes</span>(<span class="at">x =</span> G1.x, <span class="at">y =</span> G3.x, <span class="at">color =</span> school)) <span class="sc">+</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">height =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(school <span class="sc">~</span> sex) <span class="sc">+</span>  <span class="co"># Facet by school and sex</span></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"G1 (Math First Period Grade)"</span>, </span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"G3 (Math Final Grade)"</span>, </span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Scatterplot of G3 vs G1 Faceted by School and Sex"</span>, </span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">"School"</span>) <span class="sc">+</span></span>
+<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ST_558_HW5_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ST_558_HW5_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
