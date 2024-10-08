@@ -347,17 +347,39 @@ ggplot(student_combined, aes(x = G1.x, y = G3.x)) +
   labs(x = "G1", y = "G3", title = "Faceted Scatterplot of G3 vs G1 by Address")
 ```
 
+#### Faceted Scatterplot of G3 vs G2 by Address
+
+```{r}
+ggplot(student_combined, aes(x = G2.x, y = G3.x)) +
+  geom_point(aes(color = school)) +
+  facet_wrap(~address) +
+  labs(x = "G2", y = "G3", title = "Faceted Scatterplot of G3 vs G2 by Address")
+```
+
 ***The plot shows that Urban students performs slightly better than Rural students. And both plots are similar in pattern. Although there are slightly more data points in Urban area.***
 
-#### Scatterplot with faceting by two categorical variables (school and sex)
+#### Scatterplot with faceting by two categorical variables (school and sex) for G1 and G3
 
 ```{r}
 ggplot(student_combined, aes(x = G1.x, y = G3.x, color = school)) +
   geom_jitter(width = 0.2, height = 0.2) +
-  facet_grid(school ~ sex) +  # Facet by school and sex
+  facet_grid(school ~ sex) +
   labs(x = "G1 (Math First Period Grade)", 
        y = "G3 (Math Final Grade)", 
        title = "Scatterplot of G3 vs G1 Faceted by School and Sex", 
+       color = "School") +
+  theme_minimal()
+```
+
+#### Scatterplot with faceting by two categorical variables (school and sex) for G2 and G3
+
+```{r}
+ggplot(student_combined, aes(x = G2.x, y = G3.x, color = school)) +
+  geom_jitter(width = 0.2, height = 0.2) +
+  facet_grid(school ~ sex) +  # Facet by school and sex
+  labs(x = "G2 (Math Second Period Grade)", 
+       y = "G3 (Math Final Grade)", 
+       title = "Scatterplot of G3 vs G2 Faceted by School and Sex", 
        color = "School") +
   theme_minimal()
 ```
