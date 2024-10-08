@@ -1,0 +1,342 @@
+---
+title: "ST_558_HW5"
+author: "Jay Thakur"
+format: html
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+## Task 1: Read in the Data and Modify
+
+### Reading data and combining
+
+```{r}
+d1 <- read.csv("student-mat.csv", sep = ";", header = TRUE)
+d2 <- read.csv("student-por.csv", sep = ";", header = TRUE)
+
+d3=merge(d1,d2,by=c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet"))
+print(nrow(d3))
+```
+
+### Reading data using read_delim from tidyverse
+
+```{r}
+library(readr)
+library(dplyr)
+
+d1 <- read_delim("student-mat.csv",delim = ";")
+d2 <- read_delim("student-por.csv",delim = ";")
+
+student_combined <- inner_join(d1, d2, by = c("school", "sex", "age", "address", 
+                                                                "famsize", "Pstatus", "Medu", "Fedu", 
+                                                                "Mjob", "Fjob", "reason", "nursery", 
+                                                                "internet"))
+
+```
+
+***The warning message suggests that there are multiple matching rows in both datasets (student-mat and student-por). This happens when combination of values in join are not unique. In this case we have some rows that don't have unique values for school, sex, age, etc., combinations in both datasets.***
+
+### Using inner join on all variables except G1, G2, G3, paid, and absences
+
+```{r}
+student_combined_final <- inner_join(d1, d2, by = c("school", "sex", "age", "address", 
+                                                                      "famsize", "Pstatus", "Medu", "Fedu", 
+                                                                      "Mjob", "Fjob", "reason", "guardian", 
+                                                                      "traveltime", "studytime", "failures", 
+                                                                      "schoolsup", "famsup", "activities", 
+                                                                      "nursery", "higher", "internet", 
+                                                                      "romantic", "famrel", "freetime", 
+                                                                      "goout", "Dalc", "Walc", "health", "absences"))
+student_combined_final
+```
+
+### Converting school, sex, address and famsize into factor
+
+```{r}
+d1 <- d1 |>
+  mutate(school = as.factor(school),
+         sex = as.factor(sex),
+         address = as.factor(address),
+         famsize = as.factor(famsize))
+
+d2 <- d2 |>
+  mutate(school = as.factor(school),
+         sex = as.factor(sex),
+         address = as.factor(address),
+         famsize = as.factor(famsize))
+
+student_combined_final <- student_combined_final |>
+  mutate(school = as.factor(school),
+         sex = as.factor(sex),
+         address = as.factor(address),
+         famsize = as.factor(famsize))
+```
+
+## Task 2: Summarize the Data
+
+### Checking missing values in data
+
+```{r}
+library(tidyverse)
+
+glimpse(student_combined)
+
+missing_summary <- student_combined |>
+  summarize(across(everything(), ~ sum(is.na(.)))) |>
+  pivot_longer(cols = everything(), names_to = "Variable", values_to = "Missing_Count") ## |>
+  # filter(Missing_Count > 0)
+
+
+print(missing_summary)
+```
+
+***No missing values in data. Based on filter(Missing_Count \> 0) subsetting we can check if there is missing data.***
+
+### Categorical variables
+
+#### Creating One way, two way and three-way contingency table with school, sex and address.
+
+```{r}
+table_one_way <- table(student_combined$school)
+print(table_one_way)
+```
+
+***342 value in table shows that there are 342 students in Gabriel Pereira school.***
+
+```{r}
+table_two_way <- table(student_combined$school, student_combined$sex)
+print(table_two_way)
+```
+
+***First row, 175 & 167, in above table shows that there are 175 female students and 167 male students in Gabriel Pereira school.***
+
+```{r}
+table_three_way <- table(student_combined$school, student_combined$sex, student_combined$address)
+print(table_three_way)
+```
+
+***First row in first list, GP 29 30, shows that there are 29 Female and 30 male students in Gabriel Pereira school with address type as rural.***
+
+#### Subsetting the data as Urban address type and then creating the two-way table
+
+```{r}
+conditional_table_subset <- student_combined |>
+  filter(address == "U") |>
+  with(table(school, sex))
+
+print(conditional_table_subset)
+```
+
+***Number of Male and female students in each school with Urban address type.***
+
+#### Creating three-way table and then subsetting it as Urban address type
+
+```{r}
+three_way_table <- table(student_combined$school, student_combined$sex, student_combined$address)
+conditional_table_three_way <- three_way_table[,, "U"]
+
+print(conditional_table_three_way)
+```
+
+#### Creating a two-way contingency table using dplyr, groupby and summarize.
+
+```{r}
+contingency_table <- student_combined |>
+  group_by(school, sex) |>
+  summarize(count = n(), .groups = "drop") |>
+  pivot_wider(names_from = sex, values_from = count)
+
+print(contingency_table)
+
+```
+
+***The output shows us number Male and Female students in each school.***
+
+#### Creating stacked Bar Graph of School by Sex
+
+```{r}
+ggplot(student_combined, aes(x = school, fill = sex)) +
+  geom_bar(position = "stack") +
+  labs(x = "School", y = "Count", fill = "Sex", title = "Stacked Bar Graph of School by Sex")
+```
+
+***The graph shows that GP school has more students than MS. And the graph shows division by Sex.***
+
+#### Creating side-by-Side Bar Graph of School by Sex
+
+```{r}
+ggplot(student_combined, aes(x = school, fill = sex)) +
+  geom_bar(position = "dodge") +
+  labs(x = "School", y = "Count", fill = "Sex", title = "Side-by-Side Bar Graph of School by Sex")
+```
+
+***Same with this graph, it shows that in both school there are more Female students than Male.***
+
+### Numeric variables (and across groups)
+
+#### Calculating Measures of centre (mean) and spread (SD) for age, G3 from the Portuguese dataset, and absences
+
+```{r}
+summary_stats <- student_combined |>
+  filter(internet == "yes") |>
+  summarize(
+    mean_age = mean(age, na.rm = TRUE),
+    sd_age = sd(age, na.rm = TRUE),
+    mean_G3_por = mean(G3.y, na.rm = TRUE),
+    sd_G3_por = sd(G3.y, na.rm = TRUE),
+    mean_absences = mean(absences.x, na.rm = TRUE),
+    sd_absences = sd(absences.x, na.rm = TRUE)
+  )
+
+print(summary_stats)
+```
+
+***Low SD of age shows that Students are mostly around mean age i.e., 16.5. But in case of absenses we can see high number of variability.***
+
+#### Calculating Measures of centre (mean) and spread (SD) for age, G3 from the Portuguese dataset, and absences after subsetting on Filter variable
+
+```{r}
+summary_stats <- student_combined |>
+  filter(internet == "yes") |>
+  summarize(
+    mean_age = mean(age, na.rm = TRUE),
+    sd_age = sd(age, na.rm = TRUE),
+    mean_G3_por = mean(G3.y, na.rm = TRUE),
+    sd_G3_por = sd(G3.y, na.rm = TRUE),
+    mean_absences = mean(absences.x, na.rm = TRUE),
+    sd_absences = sd(absences.x, na.rm = TRUE)
+  )
+
+print(summary_stats)
+
+summary_stats <- student_combined |>
+  filter(internet == "no") |>
+  summarize(
+    mean_age = mean(age, na.rm = TRUE),
+    sd_age = sd(age, na.rm = TRUE),
+    mean_G3_por = mean(G3.y, na.rm = TRUE),
+    sd_G3_por = sd(G3.y, na.rm = TRUE),
+    mean_absences = mean(absences.x, na.rm = TRUE),
+    sd_absences = sd(absences.x, na.rm = TRUE)
+  )
+
+print(summary_stats)
+```
+
+***As from above values we can see that mean and SD value for absense where Internet variable had "Yes" value is more than the other one.***
+
+#### Calculating Measures of centre (mean) and spread (SD) for age, G3 from the Portuguese dataset, and absences after subsetting on Filter variable across Sex
+
+```{r}
+summary_stats <- student_combined |>
+  group_by(sex) |>
+  summarize(
+    mean_age = mean(age, na.rm = TRUE),
+    sd_age = sd(age, na.rm = TRUE),
+    mean_G3_por = mean(G3.y, na.rm = TRUE),
+    sd_G3_por = sd(G3.y, na.rm = TRUE),
+    mean_absences = mean(absences.x, na.rm = TRUE),
+    sd_absences = sd(absences.x, na.rm = TRUE)
+  )
+
+print(summary_stats)
+```
+
+***We can see that mean age for both Male and female are same but Females have more average score in grade. This could suggest female students performs better or more consistent than Male as Male students have more SD.***
+
+#### Calculating Measures of centre (mean) and spread (SD) for age, G3 from the Portuguese dataset, and absences after subsetting on Filter variable across Sex and School
+
+```{r}
+summary_stats <- student_combined |>
+  group_by(school, sex) |>
+  summarize(
+    mean_age = mean(age, na.rm = TRUE),
+    sd_age = sd(age, na.rm = TRUE),
+    mean_G3_por = mean(G3.y, na.rm = TRUE),
+    sd_G3_por = sd(G3.y, na.rm = TRUE),
+    mean_absences = mean(absences.x, na.rm = TRUE),
+    sd_absences = sd(absences.x, na.rm = TRUE)
+  )
+
+print(summary_stats)
+```
+
+***From above summary we can see that students at MS are older than GP. And male students at MS have significantly lower Grades than all other groups. And despite having higher grades, Female students at GP have higher number of absenses.***
+
+#### Correlation matrix between all of the numeric variables
+
+```{r}
+numeric_vars <- student_combined |> select(age, absences.x, absences.y, G1.x, G2.x, G3.x, G1.y, G2.y, G3.y)
+cor_matrix <- cor(numeric_vars, use = "complete.obs")
+print(cor_matrix)
+
+```
+
+#### Histogram and density plot for age by school
+
+```{r}
+ggplot(student_combined, aes(x = age, fill = school)) +
+  geom_histogram(alpha = 0.6, position = "identity", binwidth = 1) +
+  labs(x = "Age", title = "Histogram of Age by School")
+
+ggplot(student_combined, aes(x = age, color = school)) +
+  geom_density() +
+  labs(x = "Age", title = "Density Plot of Age by School")
+```
+
+***Histogram shows us that there are older students in MS school and significant different in student population between GP and MS. Density plot shows sharp peak at 18 for MS might indicate that this school is mostly for students with 18 years. And GP school have variable age spread which would consist of students with varied age.***
+
+#### Boxplot for absences by sex
+
+```{r}
+ggplot(student_combined, aes(x = sex, y = absences.x, fill = sex)) +
+  geom_boxplot() +
+  labs(x = "Sex", y = "Absences", title = "Boxplot of Absences by Sex")
+```
+
+***Presence of outliers in both Male and Female shows absences in school. The spread of absense is more in Male than Female students. The median value of absence is similar in both Male and Female which would mean it is not affected by Gender Variable.***
+
+#### Scatterplot with jitter for G3 vs G1, colored by school
+
+```{r}
+ggplot(student_combined, aes(x = G1.x, y = G3.x, color = school)) +
+  geom_jitter(width = 0.2, height = 0.2) +
+  labs(x = "G1", y = "G3", color = "School", title = "Scatterplot of G3 vs G1 Colored by School")
+```
+
+#### Scatterplot with jitter for G3 vs G2, colored by school
+
+```{r}
+ggplot(student_combined, aes(x = G2.x, y = G3.x, color = school)) +
+  geom_jitter(width = 0.2, height = 0.2) +
+  labs(x = "G2", y = "G3", color = "School", title = "Scatterplot of G3 vs G2 Colored by School")
+```
+
+***Both of the scatter plots show string correlation, which means Final Grades is closely similar to performance in G1 and G2. And the overlap between two schools shows that there is not much difference in grades of two school.***
+
+#### Faceted Scatterplot of G3 vs G1 by Address
+
+```{r}
+ggplot(student_combined, aes(x = G1.x, y = G3.x)) +
+  geom_point(aes(color = school)) +
+  facet_wrap(~address) +
+  labs(x = "G1", y = "G3", title = "Faceted Scatterplot of G3 vs G1 by Address")
+```
+
+***The plot shows that Urban students performs slightly better than Rural students. And both plots are similar in pattern. Although there are slightly more data points in Urban area.***
+
+#### Scatterplot with faceting by two categorical variables (school and sex)
+
+```{r}
+ggplot(student_combined, aes(x = G1.x, y = G3.x, color = school)) +
+  geom_jitter(width = 0.2, height = 0.2) +
+  facet_grid(school ~ sex) +  # Facet by school and sex
+  labs(x = "G1 (Math First Period Grade)", 
+       y = "G3 (Math Final Grade)", 
+       title = "Scatterplot of G3 vs G1 Faceted by School and Sex", 
+       color = "School") +
+  theme_minimal()
+```
+
+***Large number of data points in GP school shows that data might be more skewed towards it in both genders. Also even though there are less students in MS, it shows more consistent grades than GP. Gender wise performance in GP school is almost uniform and similar for Male and Female students.***
